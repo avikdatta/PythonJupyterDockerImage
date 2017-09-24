@@ -46,4 +46,4 @@ RUN pip install    \
         slackclient \
         asana
         
-CMD ['bash']
+CMD ['jupyter-notebook --ip 0.0.0.0']
