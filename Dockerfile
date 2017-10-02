@@ -44,7 +44,6 @@ RUN pip install    \
         openpyxl   \
         sqlalchemy \
         slackclient \
-        asana       \
-        facebook-sdk
+        asana       
         
 CMD ["jupyter-notebook", "--ip", "0.0.0.0"]
