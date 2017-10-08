@@ -28,6 +28,7 @@ RUN eval "$(pyenv init -)"
 RUN pyenv global 3.5.2
 
 RUN pip install    \
+        --no-cache-dir -q \
         cython     \
         numpy      \
         scipy      \
@@ -48,4 +49,4 @@ RUN pip install    \
         asana       
         
 EXPOSE 8888
-CMD ['jupyter-notebook', '--ip=0.0.0.0', '--port=8888', '--no-browser']
+CMD ['jupyter','notebook', '--ip=0.0.0.0', '--port=8888', '--no-browser']
