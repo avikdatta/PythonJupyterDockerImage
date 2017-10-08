@@ -14,7 +14,8 @@ RUN apt-get -y update &&   \
     tk-dev                 \
     gfortran               \
     mysql-client-5.7       \
-    sqlite3                
+    sqlite3                \
+    &&  apt-get purge -y --auto-remove
     
 USER $NB_USER
 WORKDIR /home/$NB_USER
@@ -46,4 +47,5 @@ RUN pip install    \
         slackclient \
         asana       
         
-CMD ["jupyter-notebook", "--ip", "0.0.0.0"]
+EXPOSE 8888
+CMD ['jupyter-notebook', '--ip=0.0.0.0', '--port=8888', '--no-browser']
