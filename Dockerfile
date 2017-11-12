@@ -15,7 +15,9 @@ RUN apt-get -y update &&   \
     gfortran               \
     mysql-client-5.7       \
     sqlite3                \
-    &&  apt-get purge -y --auto-remove
+    &&  apt-get purge -y --auto-remove \
+    &&  apt-get clean \
+    &&  rm -rf /var/lib/apt/lists/*
     
 USER $NB_USER
 WORKDIR /home/$NB_USER
@@ -47,6 +49,9 @@ RUN pip install    \
         sqlalchemy \
         slackclient \
         asana       
-        
+
+RUN rm -rf /home/$NB_USER/.cache \
+    && rm -rf /home/$NB_USER/tmp
+    
 EXPOSE 8888
 CMD ['jupyter','notebook', '--ip=0.0.0.0', '--port=8888', '--no-browser']
