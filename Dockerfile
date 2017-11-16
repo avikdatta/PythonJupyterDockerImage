@@ -10,7 +10,7 @@ USER root
 WORKDIR /root/
 
 RUN apt-get -y update &&   \
-    apt-get install -y     \
+    apt-get install --no-install-recommends -y     \
     tk-dev                 \
     gfortran               \
     mysql-client-5.7       \
