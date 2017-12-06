@@ -13,7 +13,6 @@ RUN apt-get -y update &&   \
     apt-get install --no-install-recommends -y     \
     tk-dev                 \
     gfortran               \
-    mysql-client-5.7       \
     sqlite3                \
     &&  apt-get purge -y --auto-remove \
     &&  apt-get clean \
@@ -48,10 +47,12 @@ RUN pip install    \
         openpyxl   \
         sqlalchemy \
         slackclient \
-        asana       
+        asana       \
+        holoviews   \
+        bokeh
 
 RUN rm -rf /home/$NB_USER/.cache \
     && rm -rf /home/$NB_USER/tmp
     
 EXPOSE 8888
-CMD ["jupyter","notebook","--ip=0.0.0.0","--port=8888","--no-browser"]
+CMD ["jupyter","notebook","--ip=0.0.0.0","--port=8888","--no-browser","--NotebookApp.iopub_data_rate_limit=100000000"]
