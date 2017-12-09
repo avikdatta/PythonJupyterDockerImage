@@ -49,7 +49,9 @@ RUN pip install    \
         slackclient \
         asana       \
         holoviews   \
-        bokeh
+        bokeh       \
+        line_profiler \
+        memory_profiler
 
 RUN rm -rf /home/$NB_USER/.cache \
     && rm -rf /home/$NB_USER/tmp
