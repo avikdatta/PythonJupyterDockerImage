@@ -54,7 +54,9 @@ RUN pip install    \
         memory_profiler
 
 RUN rm -rf /home/$NB_USER/.cache \
-    && rm -rf /home/$NB_USER/tmp
+    && rm -rf /home/$NB_USER/tmp \
+    && find $PYENV_ROOT -type d -a \( -name test -o -name tests \) -exec rm -rf '{}' \; \
+    && find $PYENV_ROOT -type f -a \( -name '*.pyc' -o -name '.pyo' \) -exec rm -rf '{}' \;
     
 EXPOSE 8888
 CMD ["jupyter","notebook","--ip=0.0.0.0","--port=8888","--no-browser","--NotebookApp.iopub_data_rate_limit=100000000"]
