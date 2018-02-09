@@ -21,9 +21,9 @@ RUN apt-get -y update &&   \
 USER $NB_USER
 WORKDIR /home/$NB_USER
 
-ENV PYENV_ROOT="/home/$NB_USER/.pyenv"   
-ENV PATH="$PYENV_ROOT/libexec/:$PATH" 
-ENV PATH="$PYENV_ROOT/shims/:$PATH"
+ENV PYENV_ROOT "/home/$NB_USER/.pyenv"   
+ENV PATH "$PYENV_ROOT/libexec/:$PATH" 
+ENV PATH "$PYENV_ROOT/shims/:$PATH"
 
 RUN eval "$(pyenv init -)" 
 RUN pyenv global 3.5.2
