@@ -53,10 +53,11 @@ RUN pip install    \
         line_profiler \
         memory_profiler
 
-RUN rm -rf /home/$NB_USER/.cache \
-    && rm -rf /home/$NB_USER/tmp \
-    && find /home/$NB_USER -type d -a \( -name test -o -name tests \) -exec rm -rf '{}' +; \
-    && find /home/$NB_USER -type f -a \( -name '*.pyc' -o -name '*.pyo' \) -exec rm -f '{}' +;
+RUN set -ex; \
+    rm -rf /home/$NB_USER/.cache; \
+    find $PYENV_ROOT -type d -a \( -name test -o -name tests \) -exec rm -rf '{}' +; \
+    find $PYENV_ROOT -type f -a \( -name '*.pyc' -o -name '*.pyo' \) -exec rm -f '{}' +; \
+    rm -rf /home/$NB_USER/tmp
     
 EXPOSE 8888
 CMD ["jupyter","notebook","--ip=0.0.0.0","--port=8888","--no-browser","--NotebookApp.iopub_data_rate_limit=100000000"]
