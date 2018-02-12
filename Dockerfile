@@ -60,5 +60,4 @@ RUN set -ex; \
     rm -rf /home/$NB_USER/tmp
     
 EXPOSE 8888
-
 CMD ["jupyter","notebook","--ip=0.0.0.0","--port=8888","--no-browser","--NotebookApp.iopub_data_rate_limit=100000000"]
