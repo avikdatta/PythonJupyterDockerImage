@@ -33,17 +33,18 @@ RUN wget https://nodejs.org/dist/v8.11.1/node-v8.11.1-linux-x64.tar.xz \
 
 ENV PATH="/home/$NB_USER/node-v8.11.1-linux-x64/bin:$PATH"
 
-RUN mkdir -p /home/$NB_USER/tmp 
-    && npm install --global yarn \
+RUN mkdir -p /home/$NB_USER/tmp    \
+    && npm install --global yarn   \
     && git clone https://github.com/jupyterlab/jupyter-renderers.git \
-    && cd jupyter-renderers \
-    && jlpm \
-    && jlpm build \
+    && cd jupyter-renderers        \
+    && jlpm                        \
+    && jlpm build                  \
     && jupyter labextension link packages/plotly-extension \
-    && jupyter labextension link packages/fasta-extension \
-    && jlpm build \
-    && jupyter lab build \
-    && rm -rf /home/$NB_USER/tmp \
+    && jlpm build                  \
+    && jupyter labextension link packages/fasta-extension  \
+    && jlpm build                  \
+    && jupyter lab build           \
+    && rm -rf /home/$NB_USER/tmp   \
     && mkdir -p /home/$NB_USER/tmp 
     
 RUN pip install    \
