@@ -28,6 +28,24 @@ ENV PATH "$PYENV_ROOT/shims/:$PATH"
 RUN eval "$(pyenv init -)" 
 RUN pyenv global 3.5.2
 
+RUN wget https://nodejs.org/dist/v8.11.1/node-v8.11.1-linux-x64.tar.xz \
+    && tar -xvf node-v8.11.1-linux-x64.tar.xz
+
+ENV PATH="/home/$NB_USER/node-v8.11.1-linux-x64/bin:$PATH"
+
+RUN mkdir -p /home/$NB_USER/tmp 
+    && npm install --global yarn \
+    && git clone https://github.com/jupyterlab/jupyter-renderers.git \
+    && cd jupyter-renderers \
+    && jlpm \
+    && jlpm build \
+    && jupyter labextension link packages/plotly-extension \
+    && jupyter labextension link packages/fasta-extension \
+    && jlpm build \
+    && jupyter lab build \
+    && rm -rf /home/$NB_USER/tmp \
+    && mkdir -p /home/$NB_USER/tmp 
+    
 RUN pip install    \
         --no-cache-dir -q \
         cython     \
