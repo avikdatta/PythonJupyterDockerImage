@@ -47,6 +47,18 @@ RUN mkdir -p /home/$NB_USER/tmp    \
     && rm -rf /home/$NB_USER/tmp   \
     && mkdir -p /home/$NB_USER/tmp 
     
+RUN cd \
+    && git clone https://github.com/plotly/jupyterlab-chart-editor.git \
+    && cd jupyterlab-chart-editor \
+    && yarn \
+    && yarn build \
+    && jupyter labextension link . \
+    && yarn build \
+    && jupyter lab build \
+    && rm -rf /home/$NB_USER/tmp   \
+    && mkdir -p /home/$NB_USER/tmp 
+    
+    
 RUN pip install    \
         --no-cache-dir -q \
         cython     \
