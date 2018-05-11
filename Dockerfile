@@ -14,6 +14,7 @@ RUN apt-get -y update &&   \
     tk-dev                 \
     gfortran               \
     sqlite3                \
+    libhdf5-serial-dev     \
     &&  apt-get purge -y --auto-remove \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/*
