@@ -15,6 +15,7 @@ RUN apt-get -y update &&   \
     gfortran               \
     sqlite3                \
     libhdf5-serial-dev     \
+    libigraph0-dev         \
     &&  apt-get purge -y --auto-remove \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/*
@@ -72,8 +73,11 @@ RUN pip install    \
         bokeh       \
         line_profiler \
         memory_profiler \
-        plotly       \
-        cufflinks
+        plotly        \
+        cufflinks     \
+        python-igraph \
+        louvain       \
+        scanpy
 
 WORKDIR /home/$NB_USER
 
