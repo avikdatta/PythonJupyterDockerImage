@@ -76,8 +76,7 @@ RUN pip install    \
         plotly        \
         cufflinks     \
         python-igraph \
-        louvain       \
-        scanpy
+        louvain       
 
 WORKDIR /home/$NB_USER
 
