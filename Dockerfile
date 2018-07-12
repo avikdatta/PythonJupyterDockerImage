@@ -30,24 +30,24 @@ ENV PATH "$PYENV_ROOT/shims/:$PATH"
 RUN eval "$(pyenv init -)" 
 RUN pyenv global 3.5.2
 
-RUN wget https://nodejs.org/dist/v8.11.1/node-v8.11.1-linux-x64.tar.xz \
-    && tar -xvf node-v8.11.1-linux-x64.tar.xz
+#RUN wget https://nodejs.org/dist/v8.11.1/node-v8.11.1-linux-x64.tar.xz \
+#    && tar -xvf node-v8.11.1-linux-x64.tar.xz
 
-ENV PATH="/home/$NB_USER/node-v8.11.1-linux-x64/bin:$PATH"
+#ENV PATH="/home/$NB_USER/node-v8.11.1-linux-x64/bin:$PATH"
 
-RUN mkdir -p /home/$NB_USER/tmp    \
-    && npm install --global yarn   \
-    && git clone https://github.com/jupyterlab/jupyter-renderers.git \
-    && cd jupyter-renderers        \
-    && jlpm                        \
-    && jlpm build                  \
-    && jupyter labextension link packages/plotly-extension \
-    && jlpm build                  \
-    && jupyter labextension link packages/fasta-extension  \
-    && jlpm build                  \
-    && jupyter lab build           \
-    && rm -rf /home/$NB_USER/tmp   \
-    && mkdir -p /home/$NB_USER/tmp 
+#RUN mkdir -p /home/$NB_USER/tmp    \
+#    && npm install --global yarn   \
+#    && git clone https://github.com/jupyterlab/jupyter-renderers.git \
+#    && cd jupyter-renderers        \
+#    && jlpm                        \
+#    && jlpm build                  \
+#    && jupyter labextension link packages/plotly-extension \
+#    && jlpm build                  \
+#    && jupyter labextension link packages/fasta-extension  \
+#    && jlpm build                  \
+#    && jupyter lab build           \
+#    && rm -rf /home/$NB_USER/tmp   \
+#    && mkdir -p /home/$NB_USER/tmp 
           
 RUN pip install    \
         --no-cache-dir -q \
@@ -85,8 +85,9 @@ RUN set -ex; \
     find $PYENV_ROOT -type d -a \( -name test -o -name tests \) -exec rm -rf '{}' +; \
     find $PYENV_ROOT -type f -a \( -name '*.pyc' -o -name '*.pyo' \) -exec rm -f '{}' +; \
     rm -rf /home/$NB_USER/tmp; \
-    rm -rf node-v8.11.1-linux-x64.tar.xz node-v8.11.1-linux-x64 jupyter-renderers; \
     mkdir /home/$NB_USER/tmp
+#    rm -rf node-v8.11.1-linux-x64.tar.xz node-v8.11.1-linux-x64 jupyter-renderers; \
+    
     
 EXPOSE 8888
 CMD ["jupyter","lab","--ip=0.0.0.0","--port=8888","--no-browser","--NotebookApp.iopub_data_rate_limit=100000000"]
