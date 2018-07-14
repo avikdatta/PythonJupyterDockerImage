@@ -80,6 +80,8 @@ RUN pip install    \
 
 WORKDIR /home/$NB_USER
 
+RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
 RUN set -ex; \
     rm -rf /home/$NB_USER/.cache; \
     find $PYENV_ROOT -type d -a \( -name test -o -name tests \) -exec rm -rf '{}' +; \
